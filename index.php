@@ -7,14 +7,24 @@ $dbobject->username=trim($_POST['username']);
 $dbobject->email=trim($_POST['email']);
 $dbobject->password=trim($_POST['password']);
 $dbobject->create();
-$dbobject->redirect("index.php");
-}
-if(isset($_POST['login']))
+$dbobject->page="index.php";
+$dbobject->redirect();
+} 
+else
+	if(isset($_POST['login']))
 {
 $dbobject->username=trim($_POST['username']);
 $dbobject->password=trim($_POST['password']);
-$dbobject->fetch();
-$dbobject->loginredirect("pagelogin.php");
+if($dbobject->auth()== 1){
+	
+	$dbobject->page="pagelogin.php";
+	$dbobject->redirect();
+	
+}else{
+	
+	$dbobject->page="index.php";
+	$dbobject->redirect();
+}
 }
 ?>
 
