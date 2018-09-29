@@ -6,10 +6,17 @@ class dbobject
       public $email;
       public $password;
       public $smtp;
+	  public $page;
+      public $loginDetail;
 	  
-      public $page;
 	  
-	  
+	   public function getUserdata()
+    {
+          global $database; global $session;
+        $this->smtp=$database->query("SELECT * FROM `login` WHERE `username`= '".$this->username."'");
+		$this->loginDetail=mysqli_fetch_array($this->smtp);
+	   $session->creatLogin();
+    }
     public function create()
     {
           global $database;
@@ -22,6 +29,7 @@ class dbobject
           global $database;
         $this->smtp=$database->query("SELECT * FROM `login` WHERE `username`= '".$this->username."' AND `password`='".$this->password."'");
 		return $database->count();
+		return $database->sessionpart();
 	   
     }  
 	

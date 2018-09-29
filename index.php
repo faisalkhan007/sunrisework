@@ -17,6 +17,7 @@ $dbobject->username=trim($_POST['username']);
 $dbobject->password=trim($_POST['password']);
 if($dbobject->auth()== 1){
 	
+	$dbobject->getUserdata();
 	$dbobject->page="pagelogin.php";
 	$dbobject->redirect();
 	
